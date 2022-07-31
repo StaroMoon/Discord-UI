@@ -2596,7 +2596,7 @@ function DiscordLib:Window(text)
 				DropdownFrameMain.ClipsDescendants = true
 				DropdownFrameMain.Position = UDim2.new(0.00999999978, 0, 2.2568965, 0)
 				DropdownFrameMain.Selectable = true
-				DropdownFrameMain.Size = UDim2.new(0, 392, 0, 77)
+				DropdownFrameMain.Size = UDim2.new(0, 392, 0, 250)
 				DropdownFrameMain.Visible = false
 
 				DropdownFrameMainCorner.CornerRadius = UDim.new(0, 3)

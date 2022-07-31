@@ -2741,12 +2741,10 @@ function DiscordLib:Window(text)
 				function DropFunc:Add(textadd)
 					itemcount = itemcount + 1
 
-					if itemcount == 1 then
-						framesize = 29
-					elseif itemcount == 2 then
-						framesize = 58
-					elseif itemcount >= 3 then
-						framesize = 87
+					if itemcount <= 5 then
+						framesize = itemcount * 29
+					else
+						framesize = 174
 					end
 
 					local Item = Instance.new("TextButton")

@@ -2583,7 +2583,7 @@ function DiscordLib:Window(text)
 				DropdownFrameMainOutline.Parent = DropdownTitle
 				DropdownFrameMainOutline.BackgroundColor3 = Color3.fromRGB(37, 40, 43)
 				DropdownFrameMainOutline.Position = UDim2.new(-0.00155700743, 0, 2.16983342, 0)
-				DropdownFrameMainOutline.Size = UDim2.new(0, 396, 0, 200)
+				DropdownFrameMainOutline.Size = UDim2.new(0, 396, 0, 81)
 				DropdownFrameMainOutline.Visible = false
 
 				DropdownFrameMainOutlineCorner.CornerRadius = UDim.new(0, 3)
@@ -2596,7 +2596,7 @@ function DiscordLib:Window(text)
 				DropdownFrameMain.ClipsDescendants = true
 				DropdownFrameMain.Position = UDim2.new(0.00999999978, 0, 2.2568965, 0)
 				DropdownFrameMain.Selectable = true
-				DropdownFrameMain.Size = UDim2.new(0, 392, 0, 250)
+				DropdownFrameMain.Size = UDim2.new(0, 392, 0, 77)
 				DropdownFrameMain.Visible = false
 
 				DropdownFrameMainCorner.CornerRadius = UDim.new(0, 3)
@@ -2652,12 +2652,10 @@ function DiscordLib:Window(text)
 				for i,v in next, list do
 					itemcount = itemcount + 1
 
-					if itemcount == 1 then
-						framesize = 29
-					elseif itemcount == 2 then
-						framesize = 58
-					elseif itemcount >= 3 then
-						framesize = 87
+					if itemcount <= 5 then
+						framesize = itemcount * 29
+					else
+						framesize = 174
 					end
 
 					local Item = Instance.new("TextButton")

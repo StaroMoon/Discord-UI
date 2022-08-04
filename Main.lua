@@ -2,7 +2,7 @@
 -- Hides users name automatically
 -- Fixed Auto upgrade
 -- Auto Ability might be broken (will fix later)
-
+-- Don't sell units when secret boss still in the map
 
 ---// Loading Section \\---
 task.wait(2)
@@ -858,7 +858,6 @@ end))
 coroutine.resume(coroutine.create(function()
   while task.wait() do
     if getgenv().UnitSellTog then
-
       for i, v in pairs(game:GetService("Players")[game.Players.LocalPlayer.Name].PlayerGui.collection.grid.List.Outer.UnitFrames
         :GetChildren()) do
         if v.Name == "CollectionUnitFrame" then
@@ -903,11 +902,12 @@ coroutine.resume(coroutine.create(function()
 end))
 
 
-------// Auto Sell \\------
+------// Auto Sell Units in Match \\------
 coroutine.resume(coroutine.create(function()
   while task.wait() do
     local _wave = game:GetService("Workspace"):WaitForChild("_wave_num")
-    if getgenv().autosell and tonumber(getgenv().sellatwave) <= _wave.Value then
+    local clown_exist = game:GetService("Workspace")["_UNITS"]:FindFirstChild("clown")
+    if getgenv().autosell and tonumber(getgenv().sellatwave) <= _wave.Value and clown_exist == nil then
       getgenv().disableatuofarm = true
       if game.PlaceId ~= 8304191830 then
         repeat task.wait() until game:GetService("Workspace"):WaitForChild("_UNITS")

@@ -175,7 +175,7 @@ function sex()
   -- Uilib Shits
 
   local DiscordLib = loadstring(game:HttpGet "https://raw.githubusercontent.com/StaroMoon/Discord-UI/main/DiscordLib.lua")()
-  local win = DiscordLib:Window("[🌊UPD 1] Anime Adventures v1.4.1" .. " - " .. tostring(identifyexecutor()))
+  local win = DiscordLib:Window("[👻UPD 2] Anime Adventures v1.4.2" .. " - " .. tostring(identifyexecutor()))
   local serv = win:Server("Anime Adventures", "http://www.roblox.com/asset/?id=6031075938")
 
   if game.PlaceId == 8304191830 then
@@ -379,6 +379,12 @@ function sex()
       updatejson()
     end)
 
+    --     local ab = require(game:GetService("ReplicatedStorage").src.Data.Worlds["Worlds_marineford"])
+    -- for i,v in pairs(ab) do
+    --     print(v["name"])
+    --     print(i, v["levels"]["1"]["id"])
+    -- end
+    -- Worlds_pre-testing Worlds_release Worlds_marineford Worlds_tokyoghoul
     local worlddrop = autofarmtab:Dropdown("Select World",
       { "Plannet Namak", "Shiganshinu District", "Snowy Town", "Hidden Sand Village", "Marine's Ford", "Ghoul City" },
       getgenv().world
@@ -1019,4 +1025,81 @@ pcall(function()
     vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
   end)
 end)
+
+-- Auto Rejoin -- Need Coroutine
+local function webhookDisconnected()
+  pcall(function()
+    local url = tostring(getgenv().weburl) --webhook
+    print("webhook?")
+    if url == "" then
+      return
+    end
+
+    local data = {
+      ["content"] = "",
+      ["username"] = "Anime Adventures",
+      ["avatar_url"] = "https://tr.rbxcdn.com/e5b5844fb26df605986b94d87384f5fb/150/150/Image/Jpeg",
+      ["embeds"] = {
+        {
+          ["author"] = {
+            ["name"] = "Anime Adventures | Disconnect",
+            ["icon_url"] = "https://cdn.discordapp.com/emojis/997123585476927558.webp?size=96&quality=lossless"
+          },
+          ["description"] = "🎮 **" .. game:GetService("Players").LocalPlayer.Name .. "** 🎮",
+          ["color"] = 110335
+        }
+      }
+    }
+
+    local bod = game:GetService("HttpService"):JSONEncode(data)
+
+    local headers = { ["content-type"] = "application/json" }
+    request = http_request or request or HttpPost or syn.request or http.request
+    local req = { Url = url, Body = bod, Method = "POST", Headers = headers }
+    warn("Sending webhook notification...")
+    request(req)
+  end)
+end
+
+repeat wait() until game.CoreGui:FindFirstChild('RobloxPromptGui')
+
+local po, ts = game.CoreGui.RobloxPromptGui.promptOverlay, game:GetService('TeleportService')
+
+po.ChildAdded:connect(function(a)
+  if a.Name == 'ErrorPrompt' then
+    repeat
+      webhookDisconnected()
+      wait(0.5)
+      ts:Teleport(8304191830)
+      wait(0.5)
+    until false
+  end
+end)
+
+-- game.NetworkClient.ChildRemoved:Connect(function()
+--   webhookdc()
+--   wait(1)
+--   game:GetService('TeleportService'):Teleport(8304191830)
+-- end)
+
+
 ---------------------------------------------------------------------
+
+-- Work
+-- while not game:IsLoaded() do wait() end
+-- local success = pcall(function()
+--     game:GetService("TeleportService"):Teleport(8304191830)
+-- end)
+-- print(success)
+-- if not success then
+--     wait(20)
+--     game:GetService("TeleportService"):Teleport(8304191830)
+-- end
+
+-- Work but maybe only synapse
+-- syn.queue_on_teleport([[game.Players.PlayerRemoving:connect(function(plr)
+--   if plr == game.Players.LocalPlayer then
+--     game:GetService('TeleportService'):Teleport(game.PlaceId)
+--   end
+-- end)]])
+-- game:GetService("TeleportService"):Teleport(game.PlaceId)

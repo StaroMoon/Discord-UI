@@ -4,6 +4,18 @@
 -- Auto Ability might be broken (will fix later)
 -- Don't sell units when secret boss still in the map
 
+-- buy summon ticket from merchant
+-- local args = {
+--   [1] = "summon_ticket307377"
+-- }
+
+-- game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(unpack(args))
+
+-- path for items in merchant
+-- game:GetService("Workspace")["travelling_merchant"].stand.items
+-- sub game:GetService("Workspace")["travelling_merchant"].stand.items.StarFruitEpic307377
+
+
 ---// Loading Section \\---
 task.wait(2)
 repeat task.wait() until game:IsLoaded()
@@ -379,6 +391,42 @@ function sex()
       updatejson()
     end)
 
+    -- Example marine ford world file
+    -- return {
+    -- 	marineford = {
+    -- 		name = "Marine's Ford",
+    -- 		map = "marineford",
+    -- 		recommended_level = 40,
+    -- 		levels = {
+    -- 			["1"] = {
+    -- 				id = "marineford_level_1"
+    -- 			},
+    -- 			["2"] = {
+    -- 				id = "marineford_level_2"
+    -- 			},
+    -- 			["3"] = {
+    -- 				id = "marineford_level_3"
+    -- 			},
+    -- 			["4"] = {
+    -- 				id = "marineford_level_4"
+    -- 			},
+    -- 			["5"] = {
+    -- 				id = "marineford_level_5"
+    -- 			},
+    -- 			["6"] = {
+    -- 				id = "marineford_level_6"
+    -- 			}
+    -- 		},
+    -- 		infinite = {
+    -- 			id = "marineford_infinite"
+    -- 		}
+    -- 	}
+    -- };
+
+    -- local ab = require(game:GetService("ReplicatedStorage").src.Data.Worlds["Worlds_marineford"])
+    -- print(ab["marineford"]["levels"]["1"]["id"])
+
+    -- Code for loop the world
     --     local ab = require(game:GetService("ReplicatedStorage").src.Data.Worlds["Worlds_marineford"])
     -- for i,v in pairs(ab) do
     --     print(v["name"])
@@ -1063,15 +1111,16 @@ end
 
 repeat wait() until game.CoreGui:FindFirstChild('RobloxPromptGui')
 
-local po, ts = game.CoreGui.RobloxPromptGui.promptOverlay, game:GetService('TeleportService')
+local po = game.CoreGui.RobloxPromptGui.promptOverlay
+local tele = game:GetService('TeleportService')
 
 po.ChildAdded:connect(function(a)
   if a.Name == 'ErrorPrompt' then
     repeat
       webhookDisconnected()
-      wait(0.5)
-      ts:Teleport(8304191830)
-      wait(0.5)
+      wait(1)
+      tele:Teleport(8304191830, game.Players.LocalPlayer)
+      wait(1)
     until false
   end
 end)

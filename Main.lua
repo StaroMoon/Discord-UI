@@ -1116,9 +1116,8 @@ local tele = game:GetService('TeleportService')
 
 po.ChildAdded:connect(function(a)
   if a.Name == 'ErrorPrompt' then
-    webhookDisconnected()
+    -- webhookDisconnected()
     repeat
-      wait(1)
       tele:Teleport(8304191830, game.Players.LocalPlayer)
       wait(1)
     until false
